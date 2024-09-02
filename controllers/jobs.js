@@ -41,7 +41,7 @@ const updateJob = async (req, res) => {
 
 const deleteJob = async (req, res) => {
   const { _id } = req.params
-  const { userId } = req.userId
+  const userId = req.userId
   const job = await Job.findOneAndDelete({ _id, userId })
   if (!job) throw new NotFoundError(`Job with Id ${_id} is not found`)
   return res.status(StatusCodes.OK).json({ msg: 'success' })
