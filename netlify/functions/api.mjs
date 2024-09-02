@@ -5,13 +5,13 @@ const helmet = require('helmet')
 const xss_clean = require('xss-clean')
 const rateLimit = require('express-rate-limit')
 require('express-async-errors')
-const { jobs_router, users_router } = require('./routes')
-const connectToDB = require('./db/connect')
+const { jobs_router, users_router } = require('../../routes')
+const connectToDB = require('../../db/connect')
 const {
   NotFoundMiddleware,
   ErrorHandlerMiddleware,
   AuthenticationMiddleware,
-} = require('./middleware')
+} = require('../../middleware')
 
 const app = express()
 
