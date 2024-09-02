@@ -1,0 +1,16 @@
+[build]
+  command = "echo Building functions"
+  functions = "netlify/functions/"
+[functions]
+  external_node_modules = ["express"]
+  node_bundler = "esbuild"
+[[redirects]]
+  force = true
+  from = "/api/v1/jobs/*"
+  status = 200
+  to = "/.netlify/functions/api/jobs/:splat"
+[[redirects]]
+  force = true
+  from = "/api/v1/auth/*"
+  status = 200
+  to = "/.netlify/functions/api/auth/:splat"
