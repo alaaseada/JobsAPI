@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "111cdaf1-7f65-41a7-8612-5149796b2ed0",
+		"name": "06-Jobs-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14547836"
+	},
+	"item": [
+		{
+			"name": "auth-register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Anna\",\n    \"email\": \"anna@gmail.com\",\n    \"password\": \"anna\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PROD_URL}}/auth/register",
+					"host": [
+						"{{PROD_URL}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth-login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"accessToken\", jsonData.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"alaaseada87@gmail.com\",\n    \"password\": \"P@$$w0rd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PROD_URL}}//auth/login",
+					"host": [
+						"{{PROD_URL}}"
+					],
+					"path": [
+						"",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllJobs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDdhMzMzYmYyYmRiZDQzZGU4M2U3NiIsIm5hbWUiOiJSb3VzaGEiLCJpYXQiOjE2NTgzMjEyNjIsImV4cCI6MTY1ODQwNzY2Mn0._QfyehCPAZIsEQGvA_Id2spD_RMHEQvonfRCQSWhb9w",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{PROD_URL}}/jobs",
+					"host": [
+						"{{PROD_URL}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDdjYjEyYTk5NDMzNThiZDlmNmQ0MiIsIm5hbWUiOiJBbm5hIiwiaWF0IjoxNjU4MzIwODMxLCJleHAiOjE2NTg0MDcyMzF9.YIuu6Q0buradcW188Qqt0Pxp2Mqu3nvHT0OuNehVrlE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{PROD_URL}}//jobs/62d9002c2024f814f66ab2f9",
+					"host": [
+						"{{PROD_URL}}"
+					],
+					"path": [
+						"",
+						"jobs",
+						"62d9002c2024f814f66ab2f9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDdhMzMzYmYyYmRiZDQzZGU4M2U3NiIsIm5hbWUiOiJSb3VzaGEiLCJpYXQiOjE2NTgzMjA3MjUsImV4cCI6MTY1ODQwNzEyNX0.p-pE50fQesHCukZIwlT-TyFESDnrnEy0aMUyO3RQc_c",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"Senior web designer\",\n    \"company\": \"AlexHighTech\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PROD_URL}}//jobs/add",
+					"host": [
+						"{{PROD_URL}}"
+					],
+					"path": [
+						"",
+						"jobs",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDdjYjEyYTk5NDMzNThiZDlmNmQ0MiIsIm5hbWUiOiJBbm5hIiwiaWF0IjoxNjU4Mzg1OTU1LCJleHAiOjE2NTg0NzIzNTV9.f0KeXZPtCiBEWHslYRJQOmVlinLcYLs5yKn0QxXpDx0",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"Refused\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PROD_URL}}/jobs/62d9002c2024f814f66ab2f9",
+					"host": [
+						"{{PROD_URL}}"
+					],
+					"path": [
+						"jobs",
+						"62d9002c2024f814f66ab2f9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDdhMzMzYmYyYmRiZDQzZGU4M2U3NiIsIm5hbWUiOiJSb3VzaGEiLCJpYXQiOjE2NTgzODYxMTIsImV4cCI6MTY1ODQ3MjUxMn0.H1YUWYxP-XUr6zNyKlxOS7RvHL8PH22VxUnidZzV0Lo",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{PROD_URL}}/jobs/62d7f940c43cf04a63fb9d34",
+					"host": [
+						"{{PROD_URL}}"
+					],
+					"path": [
+						"jobs",
+						"62d7f940c43cf04a63fb9d34"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
