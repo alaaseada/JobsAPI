@@ -30,8 +30,7 @@ const insertJob = async (req, res) => {
 
 const updateJob = async (req, res) => {
   const { _id } = req.params
-  const { userId } = req.userId
-
+  const userId = req.userId
   const job = await Job.findOneAndUpdate({ _id, userId }, req.body, {
     runValidators: true,
     new: true,
