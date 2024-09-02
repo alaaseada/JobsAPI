@@ -14,7 +14,7 @@ const getAllJobs = async (req, res) => {
 
 const getOneJob = async (req, res) => {
   const { _id } = req.params
-  const { userId } = req.userId
+  const userId = req.userId
   const job = await Job.findOne({ _id, userId })
   if (!job) throw new NotFoundError(`Job with Id ${_id} is not found`)
   return res.status(StatusCodes.OK).json({ job })
@@ -29,12 +29,9 @@ const insertJob = async (req, res) => {
 }
 
 const updateJob = async (req, res) => {
-  const { position, company, status } = req.body
   const { _id } = req.params
   const { userId } = req.userId
 
-  if (!position || !company)
-    throw new BadRequestError('Both position and company are required')
   const job = await Job.findOneAndUpdate({ _id, userId }, req.body, {
     runValidators: true,
     new: true,
