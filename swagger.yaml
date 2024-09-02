@@ -1,0 +1,212 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0-oas3
+  title: JobsAPI
+  contact: {}
+paths:
+  /auth/register:
+    post:
+      summary: auth-register
+      tags:
+        - Authentication
+      operationId: auth-register
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth-register-request'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security: []
+  /auth/login:
+    post:
+      summary: auth-login
+      tags:
+        - Authentication
+      operationId: auth-login
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth-login-request'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security: []
+  /jobs:
+    get:
+      summary: getAllJobs
+      tags:
+        - Jobs
+      operationId: getAllJobs
+      deprecated: false
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+    post:
+      summary: createJob
+      tags:
+        - Jobs
+      operationId: createJob
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createJobRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - BearerAuth: []
+  /jobs/{_id}:
+    get:
+      summary: getJob
+      tags:
+        - Jobs
+      operationId: getJob
+      deprecated: false
+      parameters:
+        - name: _id
+          in: path
+          required: true
+          description: Job ID of the job to get
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - BearerAuth: []
+    patch:
+      summary: updateJob
+      tags:
+        - Jobs
+      operationId: updateJob
+      deprecated: false
+      parameters:
+        - name: _id
+          in: path
+          required: true
+          description: Job ID of the job to get
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateJobRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - BearerAuth: []
+    delete:
+      summary: deleteJob
+      tags:
+        - Jobs
+      operationId: deleteJob
+      deprecated: false
+      parameters:
+        - name: _id
+          in: path
+          required: true
+          description: Job ID of the job to get
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - BearerAuth: []
+security:
+  - BearerAuth: []
+tags:
+  - name: Authentication
+    description: ''
+  - name: Jobs
+    description: ''
+servers:
+  - url: https://alaaseada-jobsapi.netlify.app/api/v1
+components:
+  securitySchemes:
+    BearerAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: >
+        For accessing the API, use the "Authorization" header with the "Bearer"
+        scheme. Example: "Authorization: Bearer {token}"
+  schemas:
+    auth-register-request:
+      title: auth-register-request
+      example:
+        username: Ali
+        email: ali@gmail.com
+        password: ali
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - email
+        - password
+    auth-login-request:
+      title: auth-login-request
+      example:
+        email: ali@gmail.com
+        password: ali
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+    createJobRequest:
+      title: createJobRequest
+      example:
+        position: Senior web designer
+        company: AlexHighTech
+      type: object
+      properties:
+        position:
+          type: string
+        company:
+          type: string
+      required:
+        - position
+        - company
+    updateJobRequest:
+      title: updateJobRequest
+      example:
+        status: Refused
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status

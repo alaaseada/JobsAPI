@@ -6,13 +6,16 @@ const helmet = require('helmet')
 const xss_clean = require('xss-clean')
 const rateLimit = require('express-rate-limit')
 require('express-async-errors')
-const { jobs_router, users_router } = require('../../routes')
-const connectToDB = require('../../db/connect')
+const { jobs_router, users_router } = require('./routes')
+const connectToDB = require('./db/connect')
 const {
   NotFoundMiddleware,
   ErrorHandlerMiddleware,
   AuthenticationMiddleware,
-} = require('../../middleware')
+} = require('./middleware')
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
 
 const app = express()
 
@@ -29,8 +32,14 @@ app.use(cors())
 app.use(helmet())
 app.use(xss_clean())
 app.use(limiter)
+app.get('/', (req, res) => {
+  return res.send(
+    '<h1>Welcome to our JobsAPI</h1><a href="/api-docs">Documentation</a>'
+  )
+})
 app.use('/api/v1/jobs', AuthenticationMiddleware, jobs_router)
 app.use('/api/v1/auth', users_router)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 app.use(NotFoundMiddleware)
 app.use(ErrorHandlerMiddleware)
 

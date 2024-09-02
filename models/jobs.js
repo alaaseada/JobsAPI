@@ -35,5 +35,10 @@ const jobSchema = new Schema(
   { timestamps: true }
 )
 
+jobSchema.pre('findOneAndUpdate', function (next) {
+  this.status = this.status.toLowerCase()
+  return next()
+})
+
 const Job = model('Job', jobSchema)
 module.exports = Job
