@@ -1,3 +1,4 @@
+const serverless = require('serverless-http')
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
@@ -42,6 +43,5 @@ const start = async () => {
 }
 
 start()
-
 
 export const handler = serverless(app)
