@@ -8,9 +8,9 @@
   force = true
   from = "/api/v1/jobs/*"
   status = 200
-  to = "/.netlify/functions/api/jobs/:splat"
+  to = "/.netlify/functions/api/:splat"
 [[redirects]]
   force = true
   from = "/api/v1/auth/*"
   status = 200
-  to = "/.netlify/functions/api/auth/:splat"
+  to = "/.netlify/functions/api/:splat"
