@@ -14,7 +14,7 @@ const {
 } = require('./middleware')
 const swaggerUI = require('swagger-ui-express')
 const YAML = require('yamljs')
-const swaggerDocument = YAML.load('./swagger.yaml')
+const swaggerDocument = YAML.load('swagger.yaml')
 const app = express()
 
 app.set('trust proxy', 1)
