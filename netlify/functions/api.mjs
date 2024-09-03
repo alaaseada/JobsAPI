@@ -15,7 +15,8 @@ const {
 } = require('../../middleware')
 const swaggerUI = require('swagger-ui-express')
 const YAML = require('yamljs')
-const swaggerDocument = YAML.load('../../swagger.yaml')
+const path = require('path')
+const swaggerDocument = YAML.load(path.resolve('.', 'swagger.yaml'))
 
 const app = express()
 
