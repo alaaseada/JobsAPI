@@ -30,7 +30,16 @@ const limiter = rateLimit({
 
 app.use(express.json())
 app.use(cors())
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        'script-src': ["'self'", 'https://alaaseada-jobsapi.netlify.app/'],
+      },
+    },
+  })
+)
 app.use(xss_clean())
 app.use(limiter)
 app.get('/', (req, res) => {
