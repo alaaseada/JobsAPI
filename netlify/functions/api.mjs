@@ -35,7 +35,11 @@ app.use(
     contentSecurityPolicy: {
       useDefaults: true,
       directives: {
-        'script-src': ["'self'", 'https://alaaseada-jobsapi.netlify.app/'],
+        'script-src': [
+          "'self'",
+          "'unsafe-inline'",
+          'https://alaaseada-jobsapi.netlify.app/',
+        ],
       },
     },
   })
